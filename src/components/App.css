@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  min-width: 100vw;
+  min-height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-button {
+  width: 120px;
+  height: 35px;
+  background-color: #ff4d63;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
