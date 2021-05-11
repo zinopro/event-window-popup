@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ModalWindow from "./ModalWindow";
+import { useEventInfo } from "../hooks/useEventInfo";
 import './App.css';
 
+const url = "https://www.mocky.io/v2/5d3752f1310000fc74b0788d";
+
 function App() {
-  const [events, setEvent] = useState({});
+
+  const { events , isLoading } = useEventInfo(url);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    fetch("https://www.mocky.io/v2/5d3752f1310000fc74b0788d")
-    .then(response => response.json())
-    .then(data => setEvent(data))
-    .catch(err => console.error("Request Error ", err));
-  },[])
 
-  const toggleModal = (e) => {
+  const toggleModal = () => {
     if (showModal) {
       setShowModal(false);
     } else {
@@ -23,10 +21,12 @@ function App() {
 
   return (
     <div className="App">
-      <button className="toggle-button" onClick={e => {
-          toggleModal(e);
-        }}>show Modal</button>
-      <ModalWindow data={events} show={showModal} onClose={toggleModal}></ModalWindow>
+       {
+         isLoading ? <p>Loading data...</p> : <button className="toggle-button" onClick={e => {
+           toggleModal(e);
+         }}>show Modal</button>
+      }
+      <ModalWindow data={events} show={showModal} onClose={toggleModal} />
     </div>
   );
 }
